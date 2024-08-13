@@ -10,11 +10,12 @@ import React, { useState, useEffect } from "react";
 import Timer from "../components/Timer.js";
 import LottieView from "lottie-react-native";
 import { useFonts } from "expo-font";
+import { useNavigation } from "@react-navigation/native";
 
-// TO-DO: Hint tray
 // TO-DO: Boom image
 
 export default function TopicsScreen() {
+  const navigation = useNavigation();
   const [loaded, error] = useFonts({
     "Silkscreen-Regular": require("../../assets/fonts/Silkscreen-Regular.ttf"),
     "AvenirNext-Regular": require("../../assets/fonts/AvenirNext-Regular.ttf"),
@@ -360,7 +361,11 @@ export default function TopicsScreen() {
               source={{ uri: "https://i.imgur.com/xIbrICe.png" }}
             />
             <Timer time={time} />
-            <Pressable>
+            <Pressable
+              onPress={() => {
+                navigation.navigate("Resources");
+              }}
+            >
               <Image
                 style={{ width: 30, height: 30, marginLeft: 10 }}
                 source={{ uri: "https://i.imgur.com/84nbgIQ.png" }}
