@@ -21,7 +21,7 @@ export default function TopicsScreen() {
     const [loaded, error] = await useFonts({
       "Silkscreen-Regular": require("../../assets/fonts/Silkscreen-Regular.ttf"),
       "AvenirNext-Regular": require("../../assets/fonts/AvenirNext-Regular.ttf"),
-    });   
+    });
   }
 
   const [isActive, setIsActive] = useState(false);
