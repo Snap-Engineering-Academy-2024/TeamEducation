@@ -4,19 +4,16 @@ Welcome to Team Education's project repository. Here you will find all the code 
 
 ## Why Brain Bites?
 
-We talked with the non-profit program Codetalk and found that individuals often lack exposure to opportunities for gainful employment. Capitalizing off the trend of daily games, we thought it would be game-changing to have daily challenges with an educational twist on Snapchat. When Snapchat is opened, there will be a one-time notification above the chats. The feature will permanently be visible and accessible on the user's profile. When the user opens Brain Bites and taps Learn More, they will be brought immediately to the challenge of the day. 
+We talked with the non-profit program Codetalk and found that individuals often lack exposure to opportunities for gainful employment. Capitalizing off the trend of daily games, we thought it would be game-changing to have daily challenges with an educational twist on Snapchat. When Snapchat is opened, there will be a one-time notification above the chats. The feature will permanently be visible and accessible on the user's profile. When the user opens Brain Bites and taps Learn More, they will be brought immediately to the challenge of the day. When the challenge is completed, a modal will pop-up to direct the user to resources.
 
-<img width="200" alt="chat-screen-notification" src="https://github.com/user-attachments/assets/03c7319c-7dbc-4dc6-9fcf-75140bd5a786">
-
-<img width="200" alt="profile-screen-entry" src="https://github.com/user-attachments/assets/c4e40f87-141b-4de9-a934-1478104f459d">
-
-<img width="200" alt="welcome-screen" src="https://github.com/user-attachments/assets/98bbc73f-780b-4570-882d-41cef783aa04">
-
-<img width="200" alt="game-screen" src="https://github.com/user-attachments/assets/dfc584b3-daf3-4edb-bc31-ed2cb6d4b213">
+<img width="250" alt="chat-screen-notification" src="https://github.com/user-attachments/assets/03c7319c-7dbc-4dc6-9fcf-75140bd5a786">
+<img width="250" alt="profile-screen-entry" src="https://github.com/user-attachments/assets/c4e40f87-141b-4de9-a934-1478104f459d">
+<img width="250" alt="welcome-screen" src="https://github.com/user-attachments/assets/98bbc73f-780b-4570-882d-41cef783aa04">
+<img width="250" alt="game-screen" src="https://github.com/user-attachments/assets/dfc584b3-daf3-4edb-bc31-ed2cb6d4b213">
+<img width="250" alt="game-finish-modal" src="https://github.com/user-attachments/assets/01ad2e6b-f962-4fe5-8b7a-567310c8c750">
+<img width="250" alt="resources-screen" src="https://github.com/user-attachments/assets/a3dbe390-b017-4421-8ffb-940357004463">
 
 ## To Run, Download Expo Go
-
-
 
 For [Android](https://play.google.com/store/apps/details?id=host.exp.exponent&referrer=www) on your mobile device  
 For [IOS](https://itunes.apple.com/app/apple-store/id982107779) on your mobile device  
