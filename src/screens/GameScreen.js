@@ -5,14 +5,13 @@ import {
   Pressable,
   Image,
   ScrollView,
+  Modal,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import Timer from "../components/Timer.js";
 import LottieView from "lottie-react-native";
 import { useFonts } from "expo-font";
 import { useNavigation } from "@react-navigation/native";
-
-// TO-DO: Boom image
 
 export default function TopicsScreen() {
   const navigation = useNavigation();
@@ -166,6 +165,7 @@ export default function TopicsScreen() {
       setGameComplete(true);
       setTimeout(() => {
         setGameComplete(false);
+        setSpielModalVisible(true);
       }, 3500);
     } else {
       setBoulderStyle({
@@ -182,6 +182,9 @@ export default function TopicsScreen() {
       currentX = 0;
       currentY = 0;
       setTimeout(() => {
+        setSpriteSource({
+          uri: "https://i.ibb.co/Ms4Xvyb/star-pixel.png",
+        });
         renderSprite();
         setPrintableCommandList(["Try again!"]);
       }, 1000);
@@ -231,6 +234,9 @@ export default function TopicsScreen() {
       invalidBoom
     ) {
       return false;
+    }
+    if (currentY === 1 && currentX === 4) {
+      setSpriteSource({ uri: "https://i.imgur.com/VxuZwv3.png" });
     }
     return true;
   };
@@ -337,6 +343,9 @@ export default function TopicsScreen() {
     }
   };
 
+  const [hintModalVisible, setHintModalVisible] = useState(false);
+  const [spielModalVisible, setSpielModalVisible] = useState(false);
+
   return (
     <View style={styles.container}>
       <ScrollView
@@ -363,7 +372,7 @@ export default function TopicsScreen() {
             <Timer time={time} />
             <Pressable
               onPress={() => {
-                navigation.navigate("Resources");
+                setHintModalVisible(true);
               }}
             >
               <Image
@@ -414,6 +423,17 @@ export default function TopicsScreen() {
           />
           <Image style={spriteStyle} source={spriteSource} />
           <Image style={arrowStyle} source={arrowSource} />
+          <Image
+            style={{
+              width: "20%",
+              height: "20%",
+              objectFit: "cover",
+              position: "absolute",
+              top: "20%",
+              left: "80%",
+            }}
+            source={{ uri: "https://i.imgur.com/VxuZwv3.png" }}
+          />
           <Image
             style={boulderStyle}
             source={{
@@ -548,6 +568,100 @@ export default function TopicsScreen() {
           style={styles.lottie}
         />
       )}
+
+      {/* Hint Modal */}
+      <View style={styles.centeredView}>
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={hintModalVisible}
+          onRequestClose={() => {
+            setHintModalVisible(!hintModalVisible);
+          }}
+        >
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <Text style={styles.modalHeading}>
+                {"It's dangerous to go alone.\nTake this hint!"}
+              </Text>
+              <Text style={styles.modalParagraph}>
+                {"Consider your current direction when you turn.\n"}
+                {"Turning left won't always make you face left!\n\n"}
+                {"Need an extra challenge?\n"}
+                {"Stop by the heart for a surprise!"}
+              </Text>
+              <Pressable
+                style={[styles.button, styles.buttonClose]}
+                onPress={() => {
+                  setHintModalVisible(!hintModalVisible);
+                }}
+              >
+                <Text style={styles.textStyle}>Got it!</Text>
+              </Pressable>
+            </View>
+          </View>
+        </Modal>
+      </View>
+
+      {/* Spiel Modal */}
+      <View style={styles.centeredView}>
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={spielModalVisible}
+          onRequestClose={() => {
+            setSpielModalVisible(!spielModalVisible);
+          }}
+        >
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <Text style={styles.modalHeading}>CONGRATULATIONS</Text>
+              <Text style={styles.modalParagraph}>
+                {"You ate that Brain Bite up!\n\n"}
+                {"Believe it or not, you just programmed an algorithm.\n"}
+                {"Algorithms are like instructions to complete a task,\n"}
+                {"and they're a fundamental aspect of coding.\n\n"}
+                {'Oftentimes, algorithms will use "functions",\n'}
+                {"which are like the Forward, Turn, and BOOM!\n"}
+                {"buttons. Programmers use simple functions to\n"}
+                {"build complex, powerful programs... like this one!\n\n"}
+                {"It seems like you'd be great at this.\n"}
+                {"Would you like to learn more about coding?"}
+              </Text>
+              <View
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  gap: 10,
+                  marginTop: 5,
+                }}
+              >
+                <Pressable
+                  style={[
+                    styles.button,
+                    styles.buttonClose,
+                    { backgroundColor: "#2e3b52" },
+                  ]}
+                  onPress={() => {
+                    setSpielModalVisible(!spielModalVisible);
+                  }}
+                >
+                  <Text style={styles.textStyle}>I'll pass.</Text>
+                </Pressable>
+                <Pressable
+                  style={[styles.button, styles.buttonClose]}
+                  onPress={() => {
+                    setSpielModalVisible(!spielModalVisible);
+                    navigation.navigate("Resources");
+                  }}
+                >
+                  <Text style={styles.textStyle}>I'll bite!</Text>
+                </Pressable>
+              </View>
+            </View>
+          </View>
+        </Modal>
+      </View>
     </View>
   );
 }
@@ -613,7 +727,7 @@ const styles = StyleSheet.create({
     color: "yellow",
     textAlign: "center",
     marginTop: 5,
-    fontSize: 10,
+    fontSize: 12,
   },
   commandButtonContainer: {
     display: "flex",
@@ -633,7 +747,7 @@ const styles = StyleSheet.create({
     textTransform: "capitalize",
     color: "white",
     textAlign: "center",
-    fontSize: 10,
+    fontSize: 12,
   },
   chillahChallenge: {
     color: "white",
@@ -660,5 +774,48 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
     zIndex: 1000,
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    marginTop: 50,
+    backgroundColor: "rgba(0, 0, 0, 0.85)",
+    borderColor: "#FFFFFF",
+    borderWidth: 2,
+    borderRadius: 20,
+    padding: 15,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  modalHeading: {
+    marginBottom: 15,
+    color: "#FFFFFF",
+    fontFamily: "AvenirNext-Regular",
+    fontSize: 20,
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  modalParagraph: {
+    marginBottom: 15,
+    textAlign: "center",
+    color: "#FFFFFF",
+    fontFamily: "AvenirNext-Regular",
+  },
+  modalImage: {
+    height: 200,
+    width: 320,
+    marginBottom: 15,
   },
 });
