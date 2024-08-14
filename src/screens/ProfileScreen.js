@@ -10,6 +10,13 @@ export default function ProfileScreen() {
   const { user } = useAuthentication();
   const [profile, setProfile] = useState(null);
 
+  getFont();
+  async function getFont() {
+    const [loaded, error] = await useFonts({
+      "AvenirNext-Regular": require("../../assets/fonts/AvenirNext-Regular.ttf"),
+    });   
+  }
+
   useEffect(() => {
     if (user) {
       fetchProfiles();
@@ -117,7 +124,7 @@ const styles = StyleSheet.create({
   },
   name: {
     color: "white",
-    fontFamily: Platform.OS === "ios" ? "Avenir Next" : "Roboto",
+    fontFamily: "AvenirNext-Regular",
     fontSize: 18,
     fontWeight: "600",
     marginTop: 24,
@@ -149,7 +156,7 @@ const styles = StyleSheet.create({
     width: 35,
   },
   heading: {
-    fontFamily: Platform.OS === "ios" ? "Avenir Next" : "Roboto",
+    fontFamily: "AvenirNext-Regular",
     fontSize: Platform.OS === "ios" ? 17 : 15,
     fontWeight: "500",
     color: "#FFFFFF",
@@ -160,7 +167,7 @@ const styles = StyleSheet.create({
     color: "gray",
   },
   buttonTitle: {
-    fontFamily: Platform.OS === "ios" ? "Avenir Next" : "Roboto",
+    fontFamily: "AvenirNext-Regular",
     fontSize: 10,
     fontWeight: "600",
     color: "#FFFFFF",

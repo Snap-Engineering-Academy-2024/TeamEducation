@@ -11,10 +11,18 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import { Button, Icon } from "@rneui/base";
 import Header from "../components/Header";
+import { useFonts } from "expo-font";
 
 export default function ChatScreen({ navigation }) {
   const insets = useSafeAreaInsets();
   const tabBarHeight = useBottomTabBarHeight();
+
+  getFont();
+  async function getFont() {
+    const [loaded, error] = await useFonts({
+      "AvenirNext-Regular": require("../../assets/fonts/AvenirNext-Regular.ttf"),
+    });   
+  }
 
   return (
     <SafeAreaView
@@ -93,7 +101,7 @@ const styles = StyleSheet.create({
     width: 40,
   },
   heading: {
-    fontFamily: Platform.OS === "ios" ? "Avenir Next" : "Roboto",
+    fontFamily: "AvenirNext-Regular",
     fontSize: Platform.OS === "ios" ? 17 : 16,
     fontWeight: "500",
     color: "#FFFFFF",
@@ -104,7 +112,7 @@ const styles = StyleSheet.create({
     color: "gray",
   },
   buttonTitle: {
-    fontFamily: Platform.OS === "ios" ? "Avenir Next" : "Roboto",
+    fontFamily: "AvenirNext-Regular",
     fontSize: Platform.OS === "ios" ? 10 : 9,
     fontWeight: "600",
     color: "#FFFFFF",

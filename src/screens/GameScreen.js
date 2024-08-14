@@ -15,10 +15,14 @@ import { useNavigation } from "@react-navigation/native";
 
 export default function TopicsScreen() {
   const navigation = useNavigation();
-  const [loaded, error] = useFonts({
-    "Silkscreen-Regular": require("../../assets/fonts/Silkscreen-Regular.ttf"),
-    "AvenirNext-Regular": require("../../assets/fonts/AvenirNext-Regular.ttf"),
-  });
+
+  getFont();
+  async function getFont() {
+    const [loaded, error] = await useFonts({
+      "Silkscreen-Regular": require("../../assets/fonts/Silkscreen-Regular.ttf"),
+      "AvenirNext-Regular": require("../../assets/fonts/AvenirNext-Regular.ttf"),
+    });   
+  }
 
   const [isActive, setIsActive] = useState(false);
   const [isPaused, setIsPaused] = useState(true);
@@ -677,7 +681,7 @@ const styles = StyleSheet.create({
     position: "relative",
     width: "85%",
     aspectRatio: 1,
-    borderRadius: "12px",
+    borderRadius: 12,
   },
   button: {
     borderRadius: 20,

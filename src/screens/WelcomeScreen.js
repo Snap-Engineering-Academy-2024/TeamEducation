@@ -1,4 +1,4 @@
-import { View, ImageBackground, Text, StyleSheet } from "react-native";
+import { View, ImageBackground, Text, StyleSheet, Platform } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Button } from "@rneui/base";
 import { useFonts } from "expo-font";
@@ -6,11 +6,13 @@ import React, { useEffect } from "react";
 
 export default function WelcomeScreen() {
   const navigation = useNavigation();
-
-  const [loaded, error] = useFonts({
-    "PressStart2P-Regular": require("../../assets/fonts/PressStart2P-Regular.ttf"),
-    "AvenirNext-Regular": require("../../assets/fonts/AvenirNext-Regular.ttf"),
-  });
+  getFont();
+  async function getFont() {
+    const [loaded, error] = await useFonts({
+      "PressStart2P-Regular": require("../../assets/fonts/PressStart2P-Regular.ttf"),
+      "AvenirNext-Regular": require("../../assets/fonts/AvenirNext-Regular.ttf"),
+    });
+  }
 
   return (
     <View style={{ width: "100%", aspectRatio: 9 / 19.5 }}>
@@ -35,50 +37,53 @@ export default function WelcomeScreen() {
   );
 }
 
+
 const styles = StyleSheet.create({
   backgroundImage: {
-    height: "100%",
-    alignItems: "center",
+      flex: 1,
+      height: "100%",
+      alignItems: "center",
+      justifyContent: "center",
   },
   heading: {
-    color: "#FFFFFF",
-    fontFamily: "AvenirNext-Regular",
-    fontSize: 30,
-    fontWeight: "700",
-    marginTop: "85%",
-    marginRight: "40%",
+      color: "#FFFFFF",
+      fontFamily: "AvenirNext-Regular",
+      fontSize: 30,
+      fontWeight: "700",
+      marginTop: Platform.OS === "ios" ? 260 : 210,                                                  
+      marginRight: Platform.OS === "ios" ? 220 : 210,
   },
   text1: {
-    marginTop: 5,
-    fontFamily: "PressStart2P-Regular",
-    fontSize: 50,
-    fontWeight: "400",
-    color: "gold",
+      marginTop: Platform.OS === "ios" ? 5 : 20,
+      fontFamily: "PressStart2P-Regular",
+      fontSize: 50,
+      fontWeight: "400",
+      color: "gold",
+      marginRight: Platform.OS === "ios" ? 140 : 120,
   },
   text2: {
-    fontFamily: "PressStart2P-Regular",
-    fontSize: 50,
-    fontWeight: "400",
-    color: "gold",
-    marginBottom: "2%",
+      fontFamily: "PressStart2P-Regular",
+      fontSize: 50,
+      fontWeight: "400",
+      color: "gold",
+      marginLeft: Platform.OS === "ios" ? 130 : 110,
+      marginBottom: Platform.OS === "ios" ? 5 : 0,
   },
   subheading: {
-    color: "#FFFFFF",
-    fontFamily: "AvenirNext-Regular",
-    fontSize: 20,
-    fontWeight: "600",
+      color: "#FFFFFF",
+      fontFamily: "AvenirNext-Regular",
+      fontSize: 20,
+      fontWeight: "600",
   },
   buttonContainer: {
-    width: 200,
-    marginTop: "30%",
-  },
+      width: 200,
+      marginTop: 220,
+      marginTop: Platform.OS === "ios" ? 260 : 200,
+      borderRadius: 10,
+  }, 
   buttonTitle: {
-    fontFamily: "AvenirNext-Regular",
-    fontWeight: "500",
-    color: "#FFFFFF",
-  },
-  button: {
-    borderRadius: 30,
-    backgroundColor: "#0FADFF",
-  },
-});
+      fontFamily: "AvenirNext-Regular",
+      fontWeight: "500",  
+      color: "#FFFFFF",
+  }, 
+})

@@ -2,9 +2,18 @@ import { SafeAreaView, View, FlatList, Text, Image, StyleSheet, Linking, Alert }
 import { useNavigation } from "@react-navigation/native";
 import { Button } from '@rneui/themed';
 import { useCallback } from "react";
+import { useFonts } from "expo-font";
 
 export default function ResourcesScreen() {
     const navigation = useNavigation();
+
+    getFont();
+    async function getFont() {
+      const [loaded, error] = await useFonts({
+        "AvenirNext-Regular": require("../../assets/fonts/AvenirNext-Regular.ttf"),
+      });   
+    }
+
     const resources = [
         {
             name: "Codetalk", 
@@ -104,7 +113,7 @@ const styles = StyleSheet.create({
     heading: {
         marginTop: 110,
         paddingHorizontal: 70,
-        fontFamily: "Avenir Next",
+        fontFamily: "AvenirNext-Regular",
         fontSize: 35,
         color: "#FFFFFF",
         textAlign: "center",
@@ -112,14 +121,14 @@ const styles = StyleSheet.create({
     },
     title: {
         color: "gold",
-        fontFamily: "Avenir Next",
+        fontFamily: "AvenirNext-Regular",
         fontSize: 40,
         fontWeight: "600",
         textAlign: "center",
     },
     paragraph: {
         color: "#FFFFFF",
-        fontFamily: "Avenir Next",
+        fontFamily: "AvenirNext-Regular",
         fontSize: 20,
         fontWeight: "500",
         textAlign: "center",
@@ -127,7 +136,7 @@ const styles = StyleSheet.create({
     },
     buttonTitle: {
         color: "#000000",
-        fontFamily: "Avenir Next",
+        fontFamily: "AvenirNext-Regular",
         fontSize: 16,
         fontWeight: "600",
     },
